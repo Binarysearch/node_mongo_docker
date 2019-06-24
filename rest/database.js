@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-const server = 'mongo_nombre_servicio:27017';
+const server = 'mongonombreservicio:27017';
 
 class Database {
   constructor() {

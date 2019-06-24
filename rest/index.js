@@ -2,6 +2,13 @@
 // Import express
 let express = require('express');
 
+// Import Body parser
+let bodyParser = require('body-parser');
+// Import Mongoose
+
+let db = require('./database');
+
+
 
 let router = express.Router();
 // Set default API response
@@ -18,6 +25,11 @@ router.get('/', function (req, res) {
 
 // Initialize the app
 let app = express();
+
+app.use(bodyParser.urlencoded({
+     extended: true
+  }));
+  app.use(bodyParser.json());
 
 app.use('/api', router)
 

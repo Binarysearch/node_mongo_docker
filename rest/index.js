@@ -1,29 +1,31 @@
-// FileName: index.js
-// Import express
+
 let express = require('express');
-
-// Import Body parser
+let mongoose = require('mongoose');
 let bodyParser = require('body-parser');
-// Import Mongoose
 
-let db = require('./database');
 
 
 
 let router = express.Router();
-// Set default API response
 router.get('/', function (req, res) {
-    res.json({
-       status: 'API Its Working',
-       message: 'Welcome to RESTHub crafted with love!',
-    });
+   mongoose.connect(`mongodb://mongonombreservicio/default`).then(() => {
+      res.json({
+         status: 'API Its Working',
+         message: 'Database connected!!!',
+      });
+   })
+   .catch(err => {
+      res.json({
+         status: 'API Its Working',
+         message: 'Database connected!!!',
+      });
+   });
 });
 
 
 
 
 
-// Initialize the app
 let app = express();
 
 app.use(bodyParser.urlencoded({
@@ -31,13 +33,9 @@ app.use(bodyParser.urlencoded({
   }));
   app.use(bodyParser.json());
 
-app.use('/api', router)
+app.use('/', router)
 
-// Setup server port
 var port = process.env.PORT || 8080;
-// Send message for default URL
-app.get('/', (req, res) => res.send('Hello World with Express'));
-// Launch app to listen to specified port
 app.listen(port, function () {
      console.log("Running RestHub on port " + port);
 });
